@@ -25,6 +25,7 @@ class App extends Component {
       .then(data => {
         this.setState({ orders: [...this.state.orders, data] })
       })
+      .catch(err => console.error(err))
   }
 
   render() {
