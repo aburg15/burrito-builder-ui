@@ -33,7 +33,14 @@ it('the form should contain a submit order button', () => {
 it('if no ingredients have been selected, `Nothing selected` should be displayed', () => {
   cy.get('p')
     .contains('Nothing selected')
+})
 
+it('user should be able to add ingredients to ingredient list', () => {
+  cy.get('[name="beans"]').click()
+  cy.get('[name="steak"]').click()
+  cy.get('[name="carnitas"]').click()
+  cy.get('p')
+    .contains('beans, steak, carnitas')
 })
 
 it('when a name is typed into the form, the value is reflected in the input', () => {
@@ -43,8 +50,16 @@ it('when a name is typed into the form, the value is reflected in the input', ()
 })
 
 it('when a user submits their order, it will render on the page', () => {
+  cy.intercept('POST', 'http://localhost:3001/api/v1/orders', {
+        statusCode: 201,
+        body: {
+          id: 2,
+          name: "Sarah",
+          ingredients: ['beans', 'steak', 'lettuce']
+        }
+      })
   cy.get('form')
-    .get('input').type('Adam')
+    .get('input').type('Sarah')
   cy.get('[name="beans"]').click()
   cy.get('[name="steak"]').click()
   cy.get('[name="lettuce"]').click()
@@ -53,7 +68,7 @@ it('when a user submits their order, it will render on the page', () => {
   cy.get('section > :nth-child(3)')
     .should('exist')
   cy.get(':nth-child(3) > h3')
-    .contains('Adam')
+    .contains('Sarah')
   cy.get(':nth-child(3) > .ingredient-list')
     .contains('beans')
   cy.get(':nth-child(3) > .ingredient-list')
