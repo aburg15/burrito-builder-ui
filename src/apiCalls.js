@@ -11,5 +11,11 @@ export const postNewOrder = (newOrder) => {
       'Content-Type': 'application/json'
     }
   })
-  .then(response => response.json())
+  .then(response => {
+    if(response.ok) {
+      return response.json()
+    } else {
+      console.log(response.message)
+    }
+  })
 }
