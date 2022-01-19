@@ -26,8 +26,12 @@ class OrderForm extends Component {
       id: Date.now(),
       ...this.state
     }
-    this.props.addOrder(newOrder)
-    this.clearInputs();
+    if (this.state.name.length > 0 && this.state.ingredients.length > 0) {
+      this.props.addOrder(newOrder)
+      this.clearInputs();
+    } else {
+      return
+    }
   }
 
   clearInputs = () => {
