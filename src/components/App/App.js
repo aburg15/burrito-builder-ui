@@ -28,6 +28,11 @@ class App extends Component {
       .catch(err => console.error(err))
   }
 
+  deleteOrder = (id) => {
+    const filteredOrders = this.state.orders.filter(entry => entry.id !== id)
+    this.setState({ orders: filteredOrders })
+  }
+
   render() {
     return (
       <main className="App">
@@ -36,7 +41,7 @@ class App extends Component {
           <OrderForm addOrder={this.addOrder} />
         </header>
 
-        <Orders orders={this.state.orders} />
+        <Orders orders={this.state.orders} deleteOrder={this.deleteOrder} />
       </main>
     );
   }
