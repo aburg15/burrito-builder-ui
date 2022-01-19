@@ -25,6 +25,17 @@ it('the form should contain a name input and a list of ingredients to choose fro
       .should('exist')
 })
 
+it('the form should contain a submit order button', () => {
+  cy.get(':nth-child(15)')
+    .should('exist')
+})
+
+it('if no ingredients have been selected, `Nothing selected` should be displayed', () => {
+  cy.get('p')
+    .contains('Nothing selected')
+
+})
+
 it('when a name is typed into the form, the value is reflected in the input', () => {
   cy.get('form')
     .get('input').type('Adam')
