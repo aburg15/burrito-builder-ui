@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {getOrders} from '../../apiCalls';
+import {getOrders, postNewOrder} from '../../apiCalls';
 import Orders from '../../components/Orders/Orders';
 import OrderForm from '../../components/OrderForm/OrderForm';
 
@@ -21,7 +21,10 @@ class App extends Component {
   }
 
   addOrder = (newOrder) => {
-    this.setState({ orders: [...this.state.orders, newOrder] })
+    return postNewOrder(newOrder)
+      .then(data => {
+        this.setState({ orders: [...this.state.orders, data] })
+      })
   }
 
   render() {
