@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.orders)
     return (
       <main className="App">
         <header>
