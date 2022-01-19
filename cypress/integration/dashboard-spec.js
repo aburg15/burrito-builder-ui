@@ -46,4 +46,10 @@ describe('dashboard',() => {
       .contains('jalapeno')
   })
 
+  it('each order should contain a delete button', () => {
+    cy.get('section > :nth-child(1) > button')
+      .should('exist')
+    cy.get('section > :nth-child(2) > button')
+      .should('exist')
+  })
 })
