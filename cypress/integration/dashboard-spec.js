@@ -1,4 +1,4 @@
-describe('main page',() => {
+describe('dashboard',() => {
   beforeEach(() => {
     cy.fixture('./orders.json').then((allOrders) => {
       cy.intercept('GET', 'http://localhost:3001/api/v1/orders', {
@@ -14,7 +14,7 @@ describe('main page',() => {
     .should('not.exist')
   })
 
-  it('should visit dashboard and render orders', () => {
+  it('should visit dashboard and render order names', () => {
     cy.contains('Pat')
       .should('exist')
     cy.contains('Sam')
