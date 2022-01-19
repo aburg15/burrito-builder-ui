@@ -12,15 +12,16 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     return getOrders()
       .then(data => {
-        this.setState({ orders: data })
+        this.setState({ orders: data.orders })
       })
       .catch(err => console.error('Error fetching:', err));
   }
 
   render() {
+    console.log(this.state.orders)
     return (
       <main className="App">
         <header>
@@ -28,7 +29,7 @@ class App extends Component {
           <OrderForm />
         </header>
 
-        <Orders orders={this.state.orders}/>
+        <Orders orders={this.state.orders} />
       </main>
     );
   }
